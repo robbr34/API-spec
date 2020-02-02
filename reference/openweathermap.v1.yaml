@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: openweathermap
+  version: '1.0'
+  description: 'Get the current weather, daily forecast for 16 days.....'
+servers:
+  - url: 'https://api.openweathermap.org/data/2.5'
+    description: prod
+paths:
+  /weather:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Weather endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorized_response'           
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: zip
+          description: zio code
+      security:
+        - app_id: []
+      description: Get weather information
+      operationId: get-weather
+components:
+  schemas:
+    unauthorized_response:
+      title: unauthorized_response
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+  securitySchemes:
+    app_id:
+      name: appid
+      type: apiKey
+      in: query
