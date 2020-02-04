@@ -1,0 +1,1671 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Work API",
+    "description": "API for accessing and interacting with work orders and notifications.",
+    "contact": {
+      "name": "Ørsted API Support",
+      "email": "apisupport@orsted.dk"
+    }
+  },
+  "paths": {
+    "/api/Health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "operationId": "GetHealth",
+        "consumes": [],
+        "produces": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "description": ""
+      }
+    },
+    "/api/MobileNotifications": {
+      "post": {
+        "tags": [
+          "MobileNotifications"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "createMobileNotificationDto",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateMobileNotificationDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/MobileNotifications/search": {
+      "post": {
+        "tags": [
+          "MobileNotifications"
+        ],
+        "operationId": "NotificationSearchAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "searchOptions",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SearchOptions[NotificationSearchField,NotificationIncludeField]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationModel"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Notifications/{notificationNumber}/deeplinkfilecontent": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "DeeplinkFileContentObsoleteAsync",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "notificationNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "deprecated": true
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "notificationNumber",
+          "in": "path",
+          "required": true,
+          "description": "The notification number for which to retrieve a deepfilelink"
+        }
+      ]
+    },
+    "/api/Notifications/{notificationNumber}/changelinkfilecontent": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "ChangeLinkFileContentAsync",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "notificationNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/Notifications/{notificationNumber}/displaylinkfilecontent": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "DisplayLinkFileContentAsync",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "notificationNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/Notifications/{notificationNumber}/deeplinkfilecontent": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "DeepLinkFileContentAsync",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "notificationNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/v1/Notifications/{notificationNumber}/appendtolongtext": {
+      "post": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "AppendToLongTextObsoleteAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "notificationNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "longText",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/LongTextAppendCommand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/Notifications/{notificationNumber}/longtext": {
+      "put": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "AppendToLongTextAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "notificationNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "longText",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/LongTextAppendCommand"
+            },
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Notifications/{notificationNumber}": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "GetNotification",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "notificationNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationModel"
+            }
+          }
+        },
+        "description": ""
+      }
+    },
+    "/api/Notifications/search": {
+      "post": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "NotificationsSearch",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "searchOptions",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SearchOptions[NotificationSearchField,NotificationIncludeField]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationModel"
+            }
+          }
+        },
+        "description": ""
+      }
+    },
+    "/api/Notifications/statistics": {
+      "post": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "StatisticsPostAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "searchOptions",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SearchOptions[NotificationSearchField,NotificationIncludeField]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "/api/WorkOrders/{orderNumber}/deepLinkFileContent": {
+      "get": {
+        "tags": [
+          "WorkOrders"
+        ],
+        "operationId": "DeepLinkFileContent",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "orderNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/WorkOrders/{orderNumber}/displayLinkFileContent": {
+      "get": {
+        "tags": [
+          "WorkOrders"
+        ],
+        "operationId": "DisplayLinkFileContent",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "orderNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/WorkOrders/{orderNumber}/changeLinkFileContent": {
+      "get": {
+        "tags": [
+          "WorkOrders"
+        ],
+        "operationId": "ChangeLinkFileContent",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "orderNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/WorkOrders/{orderNumber}": {
+      "get": {
+        "tags": [
+          "WorkOrders"
+        ],
+        "operationId": "GetWorkOrder",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "orderNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WorkOrderModel"
+            }
+          }
+        },
+        "description": ""
+      }
+    },
+    "/api/WorkOrders/search": {
+      "post": {
+        "tags": [
+          "WorkOrders"
+        ],
+        "operationId": "SearchPostAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "searchOptions",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SearchOptions[WorkOrderSearchField,WorkOrderIncludeField]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WorkOrderModel"
+            }
+          }
+        }
+      }
+    },
+    "/api/WorkOrders/statistics": {
+      "post": {
+        "tags": [
+          "WorkOrders"
+        ],
+        "operationId": "StatisticsPostAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "searchOptions",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SearchOptions[WorkOrderSearchField,WorkOrderIncludeField]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "/api/WorkOrders/classificationtypes": {
+      "post": {
+        "tags": [
+          "WorkOrders"
+        ],
+        "operationId": "GetClassificationTypes",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClassificationTypeDatabase"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/Notifications": {
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "operationId": "post-api-v2-Notifications",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Creates a notification"
+      }
+    }
+  },
+  "definitions": {
+    "CreateMobileNotificationDto": {
+      "type": "object",
+      "properties": {
+        "shortText": {
+          "type": "string"
+        },
+        "notificationDate": {
+          "type": "string"
+        },
+        "notificationTime": {
+          "type": "string"
+        },
+        "externalNotifNumber": {
+          "type": "string"
+        },
+        "equipment": {
+          "type": "string"
+        },
+        "sortNumberItem": {
+          "type": "string"
+        },
+        "codeGroupProblem": {
+          "type": "string"
+        },
+        "problemCode": {
+          "type": "string"
+        },
+        "sortNumberCause": {
+          "type": "string"
+        },
+        "codeGroupCauses": {
+          "type": "string"
+        },
+        "causeCode": {
+          "type": "string"
+        },
+        "userID": {
+          "type": "string"
+        },
+        "initialUserStatus": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "functionalLocation": {
+          "type": "string"
+        },
+        "codeGroup": {
+          "type": "string"
+        },
+        "coding": {
+          "type": "string"
+        },
+        "priority": {
+          "enum": [
+            "immediately",
+            "withinAWeek",
+            "withinAMonth",
+            "within2Months",
+            "within3Months",
+            "within6Months",
+            "withinAYear",
+            "atNextVisit"
+          ],
+          "type": "string"
+        },
+        "breakdown": {
+          "type": "boolean"
+        },
+        "longText": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LongTextItemDto"
+          }
+        },
+        "urls": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UrlItemDto"
+          }
+        },
+        "autoRelease": {
+          "type": "boolean"
+        },
+        "reportedBy": {
+          "type": "string"
+        }
+      },
+      "title": ""
+    },
+    "LongTextItemDto": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "UrlItemDto": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchOptions[NotificationSearchField,NotificationIncludeField]": {
+      "required": [
+        "filter",
+        "orderFields"
+      ],
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/SearchFilter[NotificationSearchField]"
+        },
+        "includes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "enum": [
+              "tasks",
+              "damages",
+              "causes",
+              "activities"
+            ],
+            "type": "string"
+          }
+        },
+        "orderFields": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderField[NotificationSearchField]"
+          }
+        },
+        "top": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "offset": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "SearchFilter[NotificationSearchField]": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFilter[NotificationSearchField]"
+          }
+        },
+        "logicOperator": {
+          "enum": [
+            "and",
+            "or"
+          ],
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "notificationNumber",
+            "rdspp",
+            "type",
+            "lifecycleStatus",
+            "workOrderLifecycleStatus",
+            "reqStartDate",
+            "reqEndDate",
+            "workOrderNumber",
+            "date",
+            "createdBy"
+          ],
+          "type": "string"
+        },
+        "operator": {
+          "enum": [
+            "eq",
+            "neq",
+            "in",
+            "nin",
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "sw",
+            "nsw",
+            "ew",
+            "new",
+            "co",
+            "nco",
+            "wi",
+            "swi",
+            "ewi",
+            "ol"
+          ],
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        },
+        "isNot": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OrderField[NotificationSearchField]": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "enum": [
+            "notificationNumber",
+            "rdspp",
+            "type",
+            "lifecycleStatus",
+            "workOrderLifecycleStatus",
+            "reqStartDate",
+            "reqEndDate",
+            "workOrderNumber",
+            "date",
+            "createdBy"
+          ],
+          "type": "string"
+        },
+        "order": {
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "NotificationModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "notificationNumber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "notificationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "referenceDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sapPlantId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "rdsppSite": {
+          "type": "string"
+        },
+        "rdspp": {
+          "type": "string"
+        },
+        "rdsppDescription": {
+          "type": "string"
+        },
+        "equipmentNumber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "lifecycleStatus": {
+          "enum": [
+            "created",
+            "released",
+            "completed",
+            "siteCompleted",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "sapSystemStatus": {
+          "type": "string"
+        },
+        "sapUserStatus": {
+          "type": "string"
+        },
+        "workOrderLifecycleStatus": {
+          "enum": [
+            "unknown",
+            "created",
+            "planning",
+            "planned",
+            "scheduled",
+            "dispatched",
+            "completed",
+            "verified",
+            "closed"
+          ],
+          "type": "string"
+        },
+        "sapWorkOrderSystemStatus": {
+          "type": "string"
+        },
+        "sapWorkOrderUserStatus": {
+          "type": "string"
+        },
+        "notificationType": {
+          "enum": [
+            "conditionBased",
+            "corrective",
+            "surveillance",
+            "historic",
+            "predetermined",
+            "correctiveMobile",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "longText": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LongTextItem"
+          }
+        },
+        "priority": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "requiredStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "requiredEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "eventGroupKey": {
+          "type": "string"
+        },
+        "eventCode": {
+          "type": "string"
+        },
+        "eventCodeText": {
+          "type": "string"
+        },
+        "eventGroupDescription": {
+          "type": "string"
+        },
+        "defectLocationCode": {
+          "type": "string"
+        },
+        "defectLocationGroup": {
+          "type": "string"
+        },
+        "malfunctionEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "malfunctionStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "alarmCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "breakdown": {
+          "type": "boolean"
+        },
+        "workCenter": {
+          "type": "string"
+        },
+        "plannerGroup": {
+          "type": "string"
+        },
+        "externalNotificationNumber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "orderNumber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "completedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "damages": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DamageModel"
+          }
+        },
+        "tasks": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationTaskModel"
+          }
+        },
+        "activities": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityModel"
+          }
+        },
+        "causes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CauseModel"
+          }
+        },
+        "rdsppPlantSection": {
+          "type": "string"
+        },
+        "insertedDateUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "priorityText": {
+          "type": "string"
+        },
+        "updatedDateUtc": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "LongTextItem": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "DamageModel": {
+      "type": "object",
+      "properties": {
+        "notificationNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "codeDescription": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "groupDescription": {
+          "type": "string"
+        }
+      }
+    },
+    "NotificationTaskModel": {
+      "type": "object",
+      "properties": {
+        "notificationNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "taskListText": {
+          "type": "string"
+        },
+        "lifecycleStatus": {
+          "enum": [
+            "created",
+            "released",
+            "completed"
+          ],
+          "type": "string"
+        },
+        "statusInactive": {
+          "type": "boolean"
+        },
+        "taskNumber": {
+          "type": "string"
+        },
+        "systemStatus": {
+          "type": "string"
+        },
+        "userstatus": {
+          "type": "string"
+        },
+        "codeGroup": {
+          "type": "string"
+        },
+        "taskCode": {
+          "type": "string"
+        },
+        "responsible": {
+          "type": "string"
+        },
+        "plannedStartDateUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "plannedEndDateUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "completedDateUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "completedBy": {
+          "type": "string"
+        }
+      }
+    },
+    "ActivityModel": {
+      "type": "object",
+      "properties": {
+        "notificationNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "codeDescription": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "groupDescription": {
+          "type": "string"
+        }
+      },
+      "x-tags": [
+        "Notifications"
+      ]
+    },
+    "CauseModel": {
+      "type": "object",
+      "properties": {
+        "notificationNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "codeDescription": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "groupDescription": {
+          "type": "string"
+        }
+      },
+      "x-tags": [
+        "Notifications"
+      ]
+    },
+    "LongTextAppendCommand": {
+      "type": "object",
+      "properties": {
+        "longTextToAppend": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkOrderModel": {
+      "type": "object",
+      "properties": {
+        "activityType": {
+          "type": "string"
+        },
+        "actualReleaseDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "actualStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "actualWorkSum": {
+          "format": "double",
+          "type": "number"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "estimatedCost": {
+          "format": "double",
+          "type": "number"
+        },
+        "estimatedHoursSum": {
+          "format": "double",
+          "type": "number"
+        },
+        "group": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "groupCounter": {
+          "type": "string"
+        },
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "insertedBy": {
+          "type": "string"
+        },
+        "insertedDateUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lifecycleStatus": {
+          "enum": [
+            "unknown",
+            "created",
+            "planning",
+            "planned",
+            "scheduled",
+            "dispatched",
+            "completed",
+            "verified",
+            "closed"
+          ],
+          "type": "string"
+        },
+        "maintenanceItem": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "notificationNumber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "orderEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "orderNumber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "orderStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "orderType": {
+          "type": "string"
+        },
+        "personnelNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "plannedWorkSum": {
+          "format": "double",
+          "type": "number"
+        },
+        "plannerGroup": {
+          "type": "string"
+        },
+        "plantSection": {
+          "type": "string"
+        },
+        "plantSectionType": {
+          "enum": [
+            "none",
+            "windFarm",
+            "turbine",
+            "onshoreAssets",
+            "meteorologicalMasts",
+            "subStations",
+            "typeV"
+          ],
+          "type": "string"
+        },
+        "plantSectionTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "priority": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "priorityText": {
+          "type": "string"
+        },
+        "priorityType": {
+          "type": "string"
+        },
+        "qualification": {
+          "type": "string"
+        },
+        "rdspp": {
+          "type": "string"
+        },
+        "rdsppDescription": {
+          "type": "string"
+        },
+        "rdsppPlantSection": {
+          "type": "string",
+          "readOnly": true
+        },
+        "rdsppSite": {
+          "type": "string"
+        },
+        "referenceDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "responsible": {
+          "type": "string"
+        },
+        "requiredEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "requiredStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "scheduledEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "scheduledStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "section": {
+          "type": "string"
+        },
+        "siteId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "subStatus": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "updatedBy": {
+          "type": "string"
+        },
+        "updatedDateUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "workCenter": {
+          "type": "string"
+        },
+        "retrofitNumber": {
+          "type": "string"
+        },
+        "retrofitDescription": {
+          "type": "string"
+        },
+        "classificationType": {
+          "type": "string"
+        },
+        "notification": {
+          "$ref": "#/definitions/NotificationModel"
+        },
+        "otherNotifications": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationModel"
+          }
+        },
+        "materials": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaterialModel"
+          }
+        }
+      }
+    },
+    "MaterialModel": {
+      "type": "object",
+      "properties": {
+        "material": {
+          "type": "string"
+        },
+        "materialDescription": {
+          "type": "string"
+        },
+        "materialGroup": {
+          "type": "string"
+        },
+        "materialGroupDescription": {
+          "type": "string"
+        },
+        "materialType": {
+          "type": "string"
+        },
+        "materialTypeDescription": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchOptions[WorkOrderSearchField,WorkOrderIncludeField]": {
+      "required": [
+        "filter",
+        "orderFields"
+      ],
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/SearchFilter[WorkOrderSearchField]"
+        },
+        "includes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "enum": [],
+            "type": "string"
+          }
+        },
+        "orderFields": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderField[WorkOrderSearchField]"
+          }
+        },
+        "top": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "offset": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "SearchFilter[WorkOrderSearchField]": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFilter[WorkOrderSearchField]"
+          }
+        },
+        "logicOperator": {
+          "enum": [
+            "and",
+            "or"
+          ],
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "rdspp",
+            "type",
+            "plantSectionTypeId",
+            "status",
+            "subStatus",
+            "startDate",
+            "endDate",
+            "scheduledStartDate",
+            "scheduledEndDate",
+            "orderNumber",
+            "lifecycleStatus",
+            "sapPlantId",
+            "basicStartDate",
+            "basicEndDate",
+            "retrofitNumber",
+            "classificationType",
+            "activityType",
+            "requiredEndDate"
+          ],
+          "type": "string"
+        },
+        "operator": {
+          "enum": [
+            "eq",
+            "neq",
+            "in",
+            "nin",
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "sw",
+            "nsw",
+            "ew",
+            "new",
+            "co",
+            "nco",
+            "wi",
+            "swi",
+            "ewi",
+            "ol"
+          ],
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        },
+        "isNot": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OrderField[WorkOrderSearchField]": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "enum": [
+            "rdspp",
+            "type",
+            "plantSectionTypeId",
+            "status",
+            "subStatus",
+            "startDate",
+            "endDate",
+            "scheduledStartDate",
+            "scheduledEndDate",
+            "orderNumber",
+            "lifecycleStatus",
+            "sapPlantId",
+            "basicStartDate",
+            "basicEndDate",
+            "retrofitNumber",
+            "classificationType",
+            "activityType",
+            "requiredEndDate"
+          ],
+          "type": "string"
+        },
+        "order": {
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "ClassificationTypeDatabase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CBWRCreateModel": {
+      "type": "object",
+      "title": "\"Condition Based Work Request\" create model",
+      "x-examples": {},
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "description of the condition based work request\n"
+        },
+        "longdescription": {
+          "type": "string"
+        },
+        "requiredEndDateAndTime": {
+          "type": "string"
+        }
+      },
+      "description": "The model for the Condtion Based Work Request concept when creating a new occurence"
+    }
+  }
+}

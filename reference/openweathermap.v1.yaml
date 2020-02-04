@@ -96,23 +96,24 @@ paths:
                     type: string
                   cod:
                     type: number
-
+              examples:
+                example-1: {}
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/unauthorized_response'           
+                $ref: '#/components/schemas/unauthorized_response'
+      operationId: get-weather
+      description: Get weather information
+      security:
+        - app_id: []
       parameters:
         - schema:
             type: string
           in: query
           name: zip
           description: zio code
-      security:
-        - app_id: []
-      description: Get weather information
-      operationId: get-weather
 components:
   schemas:
     unauthorized_response:
