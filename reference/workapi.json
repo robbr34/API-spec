@@ -1653,6 +1653,7 @@
       "type": "object",
       "title": "\"Condition Based Work Request\" create model",
       "x-examples": {},
+      "description": "The model for the Condtion Based Work Request concept when creating a new occurence",
       "properties": {
         "description": {
           "type": "string",
@@ -1662,10 +1663,15 @@
           "type": "string"
         },
         "requiredEndDateAndTime": {
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
+        },
+        "address": {
+          "type": "string",
+          "description": "The URL of an attachment for the notification",
+          "format": "uri"
         }
-      },
-      "description": "The model for the Condtion Based Work Request concept when creating a new occurence"
+      }
     }
   }
 }
