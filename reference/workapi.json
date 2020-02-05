@@ -637,7 +637,7 @@
         }
       }
     },
-    "/api/v2/Notifications/CondtonBasedWorkRequest": {
+    "/api/v2/Notifications/ConditonBasedWorkRequest": {
       "parameters": [],
       "post": {
         "summary": "",
@@ -655,19 +655,7 @@
             "schema": {
               "$ref": "#/definitions/CBWRCreateModel"
             },
-            "description": "Data needed to craate a Condition Based Notification",
-            "x-examples": {}
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/CBWRCreateModel"
-            },
-            "description": "Data needed to craate a Condition Based Notification",
-            "x-examples": {
-              "example-1": {}
-            }
+            "description": "Data for creating a condition based work request"
           }
         ]
       }
@@ -1674,7 +1662,9 @@
     "CBWRCreateModel": {
       "type": "object",
       "title": "\"Condition Based Work Request\" create model",
-      "x-examples": {},
+      "x-examples": {
+        "example-1": {}
+      },
       "description": "The data needed to create a  Condtion Based Work Request",
       "x-tags": [
         "Notifications",
@@ -1726,6 +1716,12 @@
           "items": {
             "$ref": "#/definitions/activityCreateModel"
           }
+        },
+        "sparePartEquipmentNumber": {
+          "type": "string"
+        },
+        "PhysicalAssetRDSPP": {
+          "type": "string"
         }
       }
     },
