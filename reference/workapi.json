@@ -637,7 +637,7 @@
         }
       }
     },
-    "/api/v2/Notifications": {
+    "/api/v2/Notifications/CondtonBasedWorkRequest": {
       "parameters": [],
       "post": {
         "summary": "",
@@ -647,7 +647,29 @@
             "description": "OK"
           }
         },
-        "description": "Creates a notification"
+        "description": "Creates a notification",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CBWRCreateModel"
+            },
+            "description": "Data needed to craate a Condition Based Notification",
+            "x-examples": {}
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CBWRCreateModel"
+            },
+            "description": "Data needed to craate a Condition Based Notification",
+            "x-examples": {
+              "example-1": {}
+            }
+          }
+        ]
       }
     }
   },
@@ -1653,7 +1675,11 @@
       "type": "object",
       "title": "\"Condition Based Work Request\" create model",
       "x-examples": {},
-      "description": "The model for the Condtion Based Work Request concept when creating a new occurence",
+      "description": "The data needed to create a  Condtion Based Work Request",
+      "x-tags": [
+        "Notifications",
+        "create"
+      ],
       "properties": {
         "description": {
           "type": "string",
@@ -1670,6 +1696,135 @@
           "type": "string",
           "description": "The URL of an attachment for the notification",
           "format": "uri"
+        },
+        "damages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DamageCreateModel"
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationTaskCreateModel"
+          }
+        },
+        "causes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/causeCreateModel"
+          }
+        },
+        "notificationEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationEventCreateModel"
+          }
+        },
+        "activities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/activityCreateModel"
+          }
+        }
+      }
+    },
+    "DamageCreateModel": {
+      "title": "DamageCreateModel",
+      "type": "object",
+      "description": "The data needed to add a damage to a Condtion Based Work Order",
+      "x-tags": [
+        "Notifications",
+        "create"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code of the damage"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "NotificationTaskCreateModel": {
+      "title": "NotificationTaskCreateModel",
+      "type": "object",
+      "description": "The data needed to add a Notification Task to a Notification",
+      "x-tags": [
+        "Notifications",
+        "create"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the task"
+        },
+        "longDescription": {
+          "type": "string",
+          "description": "A long description of the task"
+        },
+        "plannedStartDateUTC": {
+          "type": "string",
+          "format": "date"
+        },
+        "plannedEndDateUTC": {
+          "type": "string",
+          "format": "date"
+        },
+        "NotificatoinTaskTypeCode": {
+          "type": "string",
+          "description": "The code of the Notification Task Type"
+        },
+        "partyResponsibleIdentification": {
+          "type": "string",
+          "description": "Identification of the party reponsible for the task"
+        }
+      }
+    },
+    "causeCreateModel": {
+      "title": "causeCreateModel",
+      "type": "object",
+      "x-tags": [
+        "Notifications",
+        "create"
+      ],
+      "description": "Data needed to add a Cause to a Notification",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "NotificationEventCreateModel": {
+      "title": "NotificationEventCreateModel",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "description": "Data needed to add a Notification Event to a Notification"
+    },
+    "activityCreateModel": {
+      "title": "activityCreateModel",
+      "type": "object",
+      "description": "Data needed to add an activity to a Notification",
+      "properties": {
+        "code ": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
         }
       }
     }
