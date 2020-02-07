@@ -696,7 +696,7 @@
           }
         ],
         "tags": [
-          "Notifications"
+          "Condition Based Work Request"
         ]
       }
     },
@@ -746,7 +746,10 @@
             }
           }
         },
-        "description": "Changing the lifecycle status of a Condition based Work Request"
+        "description": "Changing the lifecycle status of a Condition based Work Request",
+        "tags": [
+          "Condition Based Work Request"
+        ]
       },
       "parameters": [
         {
@@ -907,6 +910,9 @@
             },
             "description": "Data for adding one ore more Notification tasks to an existing Condition based work request"
           }
+        ],
+        "tags": [
+          "Condition Based Work Request"
         ]
       }
     },
@@ -927,7 +933,9 @@
       ],
       "get": {
         "summary": "Change Notification Task",
-        "tags": [],
+        "tags": [
+          "Condition Based Work Request"
+        ],
         "responses": {
           "200": {
             "description": "OK",
