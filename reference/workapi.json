@@ -838,6 +838,9 @@
               "$ref": "#/definitions/CWBRUpdateModel"
             }
           }
+        ],
+        "tags": [
+          "Condition Based Work Request"
         ]
       }
     },
