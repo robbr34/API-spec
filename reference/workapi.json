@@ -637,14 +637,51 @@
         }
       }
     },
-    "/api/v2/Notifications/ConditonBasedWorkRequest": {
+    "/api/Notifications/ConditonBasedWorkRequest": {
       "parameters": [],
       "post": {
         "summary": "",
         "operationId": "post-api-v2-Notifications",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "description": "Number of the Notification assigned"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/validationErrorModel"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object"
+            }
           }
         },
         "description": "Creates a notification",
@@ -662,6 +699,76 @@
           "Notifications"
         ]
       }
+    },
+    "/api/notifications/ConditionBasedWorkRequest/{noticationNumber}/lifecycleStatus/{status}": {
+      "put": {
+        "summary": "",
+        "operationId": "put-api-notifications-lifecycleStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/validationErrorModel"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "description": "Changing the lifecycle status of a Condition based Work Request"
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "noticationNumber",
+          "in": "path",
+          "required": true,
+          "description": "The notification number of the Condition based work request"
+        },
+        {
+          "type": "string",
+          "name": "status",
+          "in": "path",
+          "required": true,
+          "description": "The status to change the current status to",
+          "enum": [
+            "Released",
+            "Completed",
+            "Reopened"
+          ]
+        }
+      ]
     }
   },
   "definitions": {
@@ -1685,11 +1792,6 @@
           "type": "string",
           "format": "date-time"
         },
-        "address": {
-          "type": "string",
-          "description": "The URL of an attachment for the notification",
-          "format": "uri"
-        },
         "damages": {
           "type": "array",
           "items": {
@@ -1725,6 +1827,30 @@
         },
         "PhysicalAssetRDSPP": {
           "type": "string"
+        },
+        "Attatchment": {
+          "$ref": "#/definitions/attachmentModel"
+        },
+        "requiredStartDateAndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "malfunctionStartDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "malfunctionEndDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "alarmCode": {
+          "type": "string"
+        },
+        "breakdown": {
+          "type": "boolean"
         }
       }
     },
@@ -1826,6 +1952,48 @@
           "type": "string"
         }
       }
+    },
+    "validationErrorModel": {
+      "title": "validationErrorModel",
+      "type": "object",
+      "description": "A model for returning validation errors. This model is taken from the Ørsted REST-API development standards",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "failure": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "helplink": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "attachmentModel": {
+      "title": "attachmentModel",
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "description": "An attachment for a SAP notification"
     }
   }
 }
