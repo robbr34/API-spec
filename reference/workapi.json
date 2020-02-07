@@ -640,7 +640,7 @@
     "/api/Notifications/ConditonBasedWorkRequest": {
       "parameters": [],
       "post": {
-        "summary": "",
+        "summary": "Create condition based work request",
         "operationId": "post-api-v2-Notifications",
         "responses": {
           "200": {
@@ -702,7 +702,7 @@
     },
     "/api/notifications/ConditionBasedWorkRequest/{noticationNumber}/lifecycleStatus/{status}": {
       "put": {
-        "summary": "",
+        "summary": "change status",
         "operationId": "put-api-notifications-lifecycleStatus",
         "responses": {
           "200": {
@@ -769,6 +769,221 @@
           ]
         }
       ]
+    },
+    "/api/notifications/ConditionBasedWorkRequest/{notificationNumber}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "notificationNumber",
+          "in": "path",
+          "required": true,
+          "description": "The notification number of the notification to change"
+        }
+      ],
+      "put": {
+        "summary": "change condition based work request",
+        "operationId": "put-api-notifications-ConditionBasedWorkRequest-notificationNumber",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/validationErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "description": "Changes attributes in the condition based work request",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CWBRUpdateModel"
+            }
+          }
+        ]
+      }
+    },
+    "/api/notifications/ConditionBasedWorkRequest/{notificationNumber}/NotificationTask": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "notificationNumber",
+          "in": "path",
+          "required": true,
+          "description": "The number of the notification for wich to a add a Notification tasks"
+        }
+      ],
+      "post": {
+        "summary": "Add Notification Tasks",
+        "operationId": "post-api-notifications-ConditionBasedWorkRequest-notificationNumber-NotificationTask",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "description": "The NotificationTaskNumber assigned to the task"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/validationErrorModel"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "description": "Adding Notification Tasks to an existing Notification",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NotificationTaskCreateModel"
+              }
+            },
+            "description": "Data for adding one ore more Notification tasks to an existing Condition based work request"
+          }
+        ]
+      }
+    },
+    "/api/notifications/ConditionBasedWorkRequest/{notificationNumber}/NotificationTask/{notificationTaskNumber}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "notificationNumber",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "notificationTaskNumber",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Change Notification Task",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/validationErrorModel"
+            }
+          }
+        },
+        "operationId": "get-api-notifications-ConditionBasedWorkRequest-notificationNumber-NotificationTask-notificationTaskNumber",
+        "description": "Change attributes of a specific Notification Task on a specific Notification",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NotificationTaskModel"
+            },
+            "description": "Data for changing attributes in a NotificationTask"
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -1994,6 +2209,51 @@
         }
       },
       "description": "An attachment for a SAP notification"
+    },
+    "CWBRUpdateModel": {
+      "title": "CWBRUpdateModel",
+      "type": "object",
+      "description": "Model for updating informations in the condition based work request (not any of the included concepts like damages, causes and events.",
+      "properties": {
+        "breakdown": {
+          "type": "boolean"
+        },
+        "alarmCode": {
+          "type": "string"
+        },
+        "malfunctionEndDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "malfunctionStartDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "requiredStartDateAndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Attatchment": {
+          "$ref": "#/definitions/attachmentModel"
+        },
+        "PhysicalAssetRDSPP": {
+          "type": "string"
+        },
+        "requiredEndDateAndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "longdescription": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "description": "description of the condition based work request\n"
+        }
+      }
     }
   }
 }
