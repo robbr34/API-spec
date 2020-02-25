@@ -435,6 +435,9 @@
           "items": {
             "$ref": "#/definitions/CauseWriteModel"
           }
+        },
+        "DamageNote": {
+          "$ref": "#/definitions/NoteWriteModel"
         }
       },
       "required": [
@@ -506,6 +509,9 @@
           "type": "string",
           "maxLength": 12,
           "pattern": "9*"
+        },
+        "NotificationTaskNote": {
+          "$ref": "#/definitions/NoteWriteModel"
         }
       },
       "required": [
@@ -531,6 +537,9 @@
           "type": "string",
           "description": "Code of the Cause Group",
           "maxLength": 8
+        },
+        "causeNote": {
+          "$ref": "#/definitions/NoteWriteModel"
         }
       },
       "required": [
@@ -577,6 +586,9 @@
         "comment": {
           "type": "string",
           "maxLength": 40
+        },
+        "ActivityNote": {
+          "$ref": "#/definitions/NoteWriteModel"
         }
       },
       "required": [
@@ -744,7 +756,7 @@
         "conditionbasedWorkRequest": {
           "$ref": "#/definitions/CBWRWriteModel"
         },
-        "note": {
+        "notificationNote": {
           "$ref": "#/definitions/NoteWriteModel"
         },
         "attachments": {
